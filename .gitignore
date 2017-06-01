@@ -4,5 +4,3 @@ node_modules
 .sass-cache
 *.log
 static
-submodules
-lib
