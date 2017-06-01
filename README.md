@@ -14,4 +14,4 @@ npm install react-nebo15-components --save
 
 ```
 import React from 'react';
-import validate from 'react-nebo15-components';
+import components from 'react-nebo15-components';
