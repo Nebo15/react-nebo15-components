@@ -2,7 +2,7 @@
   "name": "react-nebo15-components",
   "version": "0.0.1",
   "description": "React Components by Nebo15",
-  "main": "lib/react-nebo15-components.min.js",
+  "main": "lib",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register ./test/**/**/*spec.js",
     "lint": "eslint src spec",
@@ -31,13 +31,11 @@
     "eslint-plugin-import": "1.16.0",
     "eslint-plugin-jsx-a11y": "2.2.2",
     "eslint-plugin-react": "6.6.0",
-    "estraverse-fb": "^1.3.1",
     "jsdom": "^9.12.0",
     "mocha": "^2.3.4",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "rimraf": "^2.6.1",
-    "webpack": "1.12.9",
     "yargs": "3.32.0"
   },
   "repository": {
@@ -50,9 +48,7 @@
     ]
   },
   "keywords": [
-    "validate",
-    "validation",
-    "validator",
+    "components",
     "react",
     "nebo15"
   ],
