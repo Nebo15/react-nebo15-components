@@ -8,10 +8,5 @@ Components for React JS application.
 
 ```
 npm install react-nebo15-components --save
-```
-
-### Usage
 
 ```
-import React from 'react';
-import components from 'react-nebo15-components';

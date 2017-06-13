@@ -1,5 +1,8 @@
 import { expect } from 'chai';
 import { jsdom } from 'jsdom';
+import register from 'ignore-styles';
+
+register(['.sass', '.scss', '.css']);
 
 var exposedProperties = ['window', 'navigator', 'document'];
 

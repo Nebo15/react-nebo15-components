@@ -1,8 +1,21 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
+  "presets": [
+    "es2015",
+    "react",
+    "stage-0"
+  ],
   "plugins": [
     "transform-runtime",
-    "babel-plugin-add-module-exports",
-    "transform-es5-property-mutators"
+    "transform-decorators-legacy",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "components": "./lib",
+          "tests": "./tests",
+          "withStyles": "nebo15-isomorphic-style-loader/lib/withStyles"
+        }
+      }
+    ]
   ]
 }
