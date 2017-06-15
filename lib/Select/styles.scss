@@ -26,6 +26,10 @@ $errored: #ff1f44;
     box-shadow: 0 0 0 1px $errored;
   }
 
+  .wrap {
+    position: relative;
+  }
+
   .control {
     position: relative;
     width: 100%;
@@ -33,11 +37,11 @@ $errored: #ff1f44;
     min-height: 35px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 10px 30px 10px 10px;
     line-height: 15px;
     font-size: 14px;
-    box-shadow: 0 0 0 1px $border-color;
     cursor: pointer;
+    padding: 10px 30px 10px 10px;
+    box-shadow: 0 0 0 1px $border-color;
   }
 
   .label {

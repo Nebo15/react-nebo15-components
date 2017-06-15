@@ -51,6 +51,10 @@ $errored: #ff1f44;
   &.theme-light {
     border-color: #dadcde;
   }
+
+  &.theme-search {
+    border: none;
+  }
 }
 
 .input {
