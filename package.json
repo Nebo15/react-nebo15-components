@@ -1,6 +1,6 @@
 {
   "name": "react-nebo15-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React Components by Nebo15",
   "main": "lib",
   "scripts": {
@@ -24,6 +24,7 @@
     "enzyme": "2.8.0",
     "eslint": "3.5.0",
     "eslint-config-airbnb": "11.1.0",
+    "eslint-config-airbnb-base": "7.1.0",
     "eslint-loader": "1.7.0",
     "eslint-plugin-import": "1.16.0",
     "eslint-plugin-jsx-a11y": "2.2.2",
@@ -66,6 +67,7 @@
     "react-datepicker": ">=0.40",
     "react-nebo15-mask": ">=1.0.0",
     "react-nebo15-validate": ">=0.1.0",
-    "react-router": ">=2"
+    "react-router": ">=2",
+    "redux-form": "6.8.0"
   }
 }
