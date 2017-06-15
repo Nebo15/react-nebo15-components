@@ -68,6 +68,6 @@
     "react-nebo15-mask": ">=1.0.0",
     "react-nebo15-validate": ">=0.1.0",
     "react-router": ">=2",
-    "redux-form": "^6.8.0"
+    "redux-form": "6.8.0"
   }
 }
