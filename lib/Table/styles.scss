@@ -38,6 +38,7 @@ $breakpoint-mobile-max: 767px;
     text-align: left;
     vertical-align: middle;
     border-top: $border-color 1px solid;
+    word-wrap: break-word;
 
     &.left {
       text-align: left;
