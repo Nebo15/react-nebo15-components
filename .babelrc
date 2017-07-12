@@ -13,6 +13,7 @@
         "alias": {
           "components": "./lib",
           "tests": "./tests",
+          "stories": "./stories",
           "withStyles": "nebo15-isomorphic-style-loader/lib/withStyles"
         }
       }
