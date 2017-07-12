@@ -3,7 +3,7 @@ node_js:
 - 6.9.1
 cache:
   directories:
-  - ~/.nvm
+  - "~/.nvm"
   - node_modules
 git:
   depth: 1
@@ -11,14 +11,14 @@ env:
   global:
   - RELEASE_BRANCH="master"
   - MAIN_BRANCHES="master develop"
-  - secure: hP2jQ+Jt+J8ELRFTuGP0HfApQL0wJ18xdy2uQ03s8++pvz15CIV3fNc8cGJARjp0qWyDPxNt/Y7fwOD98yoD+vGfXGwy2kwe6Fo5cLBEbeZK7f3E3Ioej+4SbZNJXlAAvLWTbISMgnYGxcJ/V7NEV3Kf8T2o0gOIOQZzmork2IVwhb1i4Z3TO5/O9iSRwifCEeJocAffCaunnl4kNWT9sfyKlaVCBovfwV6iYl1IwoyTrRTDQ69ziYaS1Jt4ROLRvMvDdzYZE+g9JzX4oqBzgAcdiqUSfEwkpySzVbJLAJBN9gXPhqmBZWpQ7bNuNlDYTHcD8XrF+MiZLqjD3HWWz0XowI25B6eMj60Wa0j/9gOCLxsKWALqz2OY/0M7OUcOHNNyf4jC8KlBW5IvCUk/h45517dgUwa1+zjrhFYTxQ7v9IrLv0umygonw0jx3ni7R3ckzh69+wlxrQInVHD/8LOMGvgcgWYod0qWHFXsAjQlRHK8mTfC5kqmr2c+jH//vS9OEQL7m784zH6+bXGyCZaKMW0XQTpUXsOet6CJwx54ERMrtYyP+W5ku+PGdVKZVN+j7rg6kRfe7NGzqYL85e6RoJJdKU7+FyFNuVeDssMTjRFvUbjCCkvLy1wrT8QlT8QBuHXW9rWZaighcx0kbmpWFF/OBJzxsLO57AnnNE4=
+  - secure: ij7ByR80GQ75cmeI3rn0/zFAgkyD9xhOUwam6zzEB2EEYlIffrr7SsZH+Nt/1znuzUMuLKJnkI16Py49qk4HS+MY088fy2LgTI8k3ypEeZ3C9yP77KR8gOc1exQtyDhyv+CO/uUWg3GGSDa1Cr1PDJWk7rL4jNNg9kwSxNlRjiruZnMJrYY8mOhPkfJz6HDmRlpToK4Eh4cvhrKy/ZySEhlrdGyNZNXUkIOCDAFXiJZgr66tZuuwN3t+sJxsKaeoEoGW82a9Yi/zSZ8Iiauf6/VAxUloZryF5PlVALJMj1eoLsdgjWPC009c64quFBN9lbF9xwhMAbyk+hby8iZBA3h/fNM08yjX3DJ6+l4yk19TC5Ngo6c4maDqV/DDhj99JrfUmNRXVdHa07uZHfA+s4Am2bp2F0RA8xrsBTsgRd7CUibNkR3wMwKb+Wc5FR2HaWRYcrqS6S/ypkzgVq/+Bf1p4SeFsmlg1zoW77q5YQisF5Xbpy6+Wuip3MT9XjwVGamOIbmj0HgR7MqH52AholwoOk8vq608E5c71FQo1/wWtUxFZUFiw36+7pnoa0yQO1bkRAyD7PKmtuWBLyKM6vJ/YNqw8imkejF236M5wZYLAfkkedrY9PCwvp40LR22ildZ5sekn6fd531UPFPalyqVdJVVtHA5Fpe3fxrssbU=
 before_script:
 - chmod -R +x bin
-- ./bin/version-increment.sh || { exit 1; }
+- "./bin/version-increment.sh || { exit 1; }"
 script:
 - npm run lint && npm test || { exit 1; }
 after_success:
-- ./bin/ci/push.sh
+- "./bin/ci/push.sh"
 deploy:
   provider: npm
   email: ivchenkodima@gmail.com
