@@ -38,4 +38,9 @@
       "experimentalObjectRestSpread": true
     }
   },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
 }
