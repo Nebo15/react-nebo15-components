@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import CodeBlock from './CodeBlock';
-
 import addonAPI from '@storybook/addons';
+
+import CodeBlock from './CodeBlock';
 
 import './styles/markdown';
 import './styles/highlight';
@@ -11,6 +11,22 @@ import './styles/highlight';
 const baseStyle = {
   padding: '30px 15px',
   width: '100%'
+};
+
+const parseDoc = (doc) => {
+  const propsKeys = Object.keys(doc.props);
+
+  return {
+    props: propsKeys.map(name => ({
+      name,
+      type: doc.props[name].type.name,
+      values: Array.isArray(doc.props[name].type.value)
+        ? doc.props[name].type.value.map(item => item.value) : doc.props[name].type.value,
+      defaultValue: (doc.props[name].defaultValue || {}).value,
+      description: doc.props[name].description,
+      required: doc.props[name].required
+    }))
+  };
 };
 
 class DocumentationPanel extends React.Component {
@@ -24,12 +40,9 @@ class DocumentationPanel extends React.Component {
     this.onShowDocumentation = this.onShowDocumentation.bind(this);
   }
 
-  onShowDocumentation(doc) {
-    this.setState({ doc });
-  }
-
   componentDidMount() {
     const { channel, api } = this.props;
+
     channel.on('nebo15/doc-addon/show-doc', this.onShowDocumentation);
 
     this.stopListeningOnStory = api.onStory(() => {
@@ -37,20 +50,16 @@ class DocumentationPanel extends React.Component {
     });
   }
 
-  parseDoc(doc) {
-    const propsKeys = Object.keys(doc.props);
+  componentWillUnmount() {
+    this.stopListeningOnStory && this.stopListeningOnStory();
 
-    return {
-      props: propsKeys.map(name => ({
-        name,
-        type: doc.props[name].type.name,
-        values: Array.isArray(doc.props[name].type.value)
-          ? doc.props[name].type.value.map(item => item.value) : doc.props[name].type.value,
-        defaultValue: (doc.props[name].defaultValue || {}).value,
-        description: doc.props[name].description,
-        required: doc.props[name].required
-      }))
-    };
+    this.unmounted = true;
+    const { channel } = this.props;
+    channel.removeListener('nebo15/doc-addon/show-doc', this.onShowDocumentation);
+  }
+
+  onShowDocumentation(doc) {
+    this.setState({ doc });
   }
 
   render() {
@@ -60,12 +69,12 @@ class DocumentationPanel extends React.Component {
       return null;
     }
 
-    const props = this.parseDoc(Array.isArray(doc) ? doc[0] : doc).props;
+    const props = parseDoc(doc).props;
 
     return (
       <div style={baseStyle} className="markdown-body">
         <ReactMarkdown
-          source={(Array.isArray(doc) ? doc[0] : doc).description}
+          source={doc.description}
           renderers={{
             ...ReactMarkdown.renderers,
             CodeBlock
@@ -86,21 +95,11 @@ class DocumentationPanel extends React.Component {
       </div>
     );
   }
-
-  componentWillUnmount() {
-    if(this.stopListeningOnStory) {
-      this.stopListeningOnStory();
-    }
-
-    this.unmounted = true;
-    const { channel } = this.props;
-    channel.removeListener('nebo15/doc-addon/show-doc', this.onShowDocumentation);
-  }
 }
 
 addonAPI.register('nebo15/doc-addon', (api) => {
   addonAPI.addPanel('nebo15/doc-addon/panel', {
     title: 'Documentation',
     render: () => <DocumentationPanel channel={addonAPI.getChannel()} api={api} />,
-  })
+  });
 });

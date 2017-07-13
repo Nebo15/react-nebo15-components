@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 import hljs from 'highlightjs';
-
-const h = React.createElement;
 
 export default class CodeBlock extends React.Component {
   componentDidMount() {
@@ -13,14 +11,14 @@ export default class CodeBlock extends React.Component {
   }
 
   highlightCode() {
-    hljs.highlightBlock(this.refs.code);
+    hljs.highlightBlock(this.code);
   }
 
   render() {
     return (
-      h('pre', null,
-        h('code', {
-          ref: 'code',
+      React.createElement('pre', null,
+        React.createElement('code', {
+          ref: ref => (this.code = ref),
           className: this.props.language
         }, this.props.literal)
       )

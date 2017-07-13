@@ -8,5 +8,26 @@ Components for React JS application.
 
 ```
 npm install react-nebo15-components --save
+```
 
+### Storybook
+
+[Go to storybook](https://nebo15.github.io/react-nebo15-components/)
+
+Develop
+
+```
+npm run storybook
+```
+
+Build
+
+```
+npm run storybook:build
+```
+
+Deploy  to GH
+
+```
+npm run storybook:deploy
 ```

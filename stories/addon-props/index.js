@@ -1,10 +1,25 @@
-import React from 'react'
-import addonAPI from '@storybook/addons';
+import React from 'react';
 
-import { parseDocGenProps } from 'stories/helpers';
+import addonAPI from '@storybook/addons';
 import { select, boolean, text, number } from '@storybook/addon-knobs';
 
-const toBoolean = target => {
+const parseDocGenProps = (doc) => {
+  const propsKeys = Object.keys(doc.props || { });
+
+  return {
+    props: propsKeys.map(name => ({
+      name,
+      type: doc.props[name].type.name,
+      values: Array.isArray(doc.props[name].type.value)
+        ? doc.props[name].type.value.map(item => item.value) : doc.props[name].type.value,
+      defaultValue: (doc.props[name].defaultValue || {}).value,
+      description: doc.props[name].description,
+      required: doc.props[name].required
+    }))
+  };
+};
+
+const toBoolean = (target) => {
   if (target === 'false') {
     return false;
   }
@@ -16,30 +31,30 @@ const toBoolean = target => {
   return Boolean(target);
 };
 
-const prepareVal = val => {
+const prepareVal = (val) => {
   if (typeof val === 'string') {
-    return val.replace(/'/g, '')
+    return val.replace(/'/g, '');
   }
 
   return val;
 };
 
 const knobsByType = {
-  enum: ({ defaultValue = '', name, values }) => {
-    return select(name, values.map(val => prepareVal(val)), prepareVal(defaultValue));
-  },
+  enum: ({ defaultValue = '', name, values }) => (
+    select(name, values.map(val => prepareVal(val)), prepareVal(defaultValue))
+  ),
 
-  string: ({ defaultValue, name }) => {
-    return text(name, prepareVal(defaultValue));
-  },
+  string: ({ defaultValue, name }) => (
+    text(name, prepareVal(defaultValue))
+  ),
 
-  bool: ({ defaultValue, name }) => {
-    return boolean(name, toBoolean(defaultValue));
-  },
+  bool: ({ defaultValue, name }) => (
+    boolean(name, toBoolean(defaultValue))
+  ),
 
-  number: ({ defaultValue, name }) => {
-    return number(name, defaultValue);
-  },
+  number: ({ defaultValue, name }) => (
+    number(name, defaultValue)
+  ),
 };
 
 export class ShowDocumentation extends React.Component {
@@ -54,7 +69,7 @@ export class ShowDocumentation extends React.Component {
 }
 
 export default {
-  addWithDoc (storyName, story, Component, { defaultProps = { } } = { }) {
+  addWithDoc(storyName, story, Component, { defaultProps = { } } = { }) {
     const component = Component.ComposedComponent || Component;
     const name = component.displayName || component.name;
 
@@ -63,14 +78,14 @@ export default {
     return this.add(storyName, () => {
       const props = doc.props.reduce((target, prop) => {
         if (defaultProps[prop.name]) {
-          prop = { ...prop, defaultValue: defaultProps[prop.name] };
+          prop = { ...prop, defaultValue: defaultProps[prop.name] }; // eslint-disable-line
         }
 
-        if (knobsByType[prop.type] === undefined || prop.type === 'enum' && typeof prop.values === 'string') {
+        if (knobsByType[prop.type] === undefined || (prop.type === 'enum' && typeof prop.values === 'string')) {
           return target;
         }
 
-        target[prop.name] = knobsByType[prop.type](prop);
+        target[prop.name] = knobsByType[prop.type](prop); // eslint-disable-line
         return target;
       }, {});
 
@@ -81,4 +96,4 @@ export default {
       );
     });
   }
-}
+};
