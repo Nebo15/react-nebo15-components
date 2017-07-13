@@ -17,7 +17,7 @@ setOptions({
 setAddon(infoAddon);
 setAddon(propsAddon);
 
-const req = require.context('../lib', true, /\.story\.js$/)
+const req = require.context('../lib', true, /\.story\.js$/);
 
 function loadStories() {
   req.keys().forEach((filename) => req(filename))
